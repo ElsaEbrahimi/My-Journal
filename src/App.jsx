@@ -1,8 +1,17 @@
+import Home from "./pages/Home";
+import MainLayout from "./layout/MainLayout";
+import { Route, Routes } from "react-router";
 function App() {
   return (
     <>
-      {" "}
-      <h1>Hallo</h1>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+
+          {/* <Route path="journals" element={<Journals />} />
+          <Route path="*" element={<NotFound />} /> */}
+        </Route>
+      </Routes>
     </>
   );
 }
