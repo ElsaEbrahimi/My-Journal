@@ -6,7 +6,7 @@ const JournalCard = ({ title, date, image, content }) => {
     // Outer list item / main container
     <li className="p-4 bg-base-100 rounded-xl shadow-md flex gap-4 hover:shadow-lg transition-shadow duration-200">
       {/* Image container with fixed size */}
-      <div className="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
+      <div className="w-32 h-32 rounded-lg overflow-hidden shrink-0">
         {/* Image set to cover the box */}
         <img className="w-full h-full object-cover" src={image} alt={title} />
       </div>
