@@ -1,4 +1,9 @@
 @import "tailwindcss";
 @plugin 'daisyui' {
-  themes: nord --default;
+  themes: silk --default;
+}
+
+:root {
+  --primary-color: #c93400; /* primary-text */
+  --secondry-color: #ffd6a7; /* secondry-text */
 }

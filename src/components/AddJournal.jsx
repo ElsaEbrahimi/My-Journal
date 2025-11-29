@@ -1,4 +1,4 @@
-const Journals = () => {
+const AddJournal = () => {
   return (
     <>
       <ul className="list bg-base-100 rounded-box shadow-md">
@@ -172,4 +172,4 @@ const Journals = () => {
     </>
   );
 };
-export default Journals;
+export default AddJournal;
