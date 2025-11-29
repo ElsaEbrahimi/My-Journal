@@ -20,7 +20,7 @@ const Header = () => {
           <li>
             <NavLink className="btn btn-ghost text-xl" to="addjournal">
               <span className="material-icons">create</span>
-              Add Journal
+              New Journal
             </NavLink>
           </li>
         </ul>
