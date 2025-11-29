@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "A calm moment",
+    "date": "2025-11-01",
+    "image": "https://picsum.photos/seed/1/800/500",
+    "content": "A quiet start to November. I sat with a warm drink and wrote a few thoughts."
+  },
+  {
+    "id": 2,
+    "title": "New energy",
+    "date": "2025-11-02",
+    "image": "https://picsum.photos/seed/2/800/500",
+    "content": "I felt more focused today. Writing helped me clear my mind."
+  },
+  {
+    "id": 3,
+    "title": "Little walk",
+    "date": "2025-11-03",
+    "image": "https://picsum.photos/seed/3/800/500",
+    "content": "Took a walk and organized my thoughts. Good day."
+  },
+  {
+    "id": 4,
+    "title": "Good progress",
+    "date": "2025-11-04",
+    "image": "https://picsum.photos/seed/4/800/500",
+    "content": "Worked on my project and felt proud."
+  },
+  {
+    "id": 5,
+    "title": "Reset day",
+    "date": "2025-11-05",
+    "image": "https://picsum.photos/seed/5/800/500",
+    "content": "Sometimes the best thing is doing nothing. I rested well."
+  },
+  {
+    "id": 6,
+    "title": "New ideas",
+    "date": "2025-11-06",
+    "image": "https://picsum.photos/seed/6/800/500",
+    "content": "Had new ideas for my journal design."
+  },
+  {
+    "id": 7,
+    "title": "Calm night",
+    "date": "2025-11-07",
+    "image": "https://picsum.photos/seed/7/800/500",
+    "content": "Wrote at night, and it felt peaceful."
+  },
+  {
+    "id": 8,
+    "title": "Learning day",
+    "date": "2025-11-08",
+    "image": "https://picsum.photos/seed/8/800/500",
+    "content": "Learned something new today. Writing helped me keep track."
+  },
+  {
+    "id": 9,
+    "title": "Small joy",
+    "date": "2025-11-09",
+    "image": "https://picsum.photos/seed/9/800/500",
+    "content": "Something small made me smile today."
+  },
+  {
+    "id": 10,
+    "title": "Clear mind",
+    "date": "2025-11-10",
+    "image": "https://picsum.photos/seed/10/800/500",
+    "content": "Ending the 10-day journal streak with a clear mind."
+  }
+]
