@@ -1,7 +1,9 @@
 // JournalCard.jsx
 
+import { Link } from "react-router-dom";
+
 // Card component to display each journal item
-const JournalCard = ({ title, date, image, content }) => {
+const JournalCard = ({ id, title, date, image, content }) => {
   return (
     // Outer list item / main container
     <li className="p-4 bg-base-100 rounded-xl shadow-md flex gap-4 hover:shadow-lg transition-shadow duration-200">
@@ -41,9 +43,13 @@ const JournalCard = ({ title, date, image, content }) => {
           </button>
 
           {/* View details button */}
-          <button className="btn btn-sm btn-outline" title="View details">
+          <Link
+            to={`/journals/${id}`}
+            className="btn btn-sm btn-outline"
+            title="View details"
+          >
             Read
-          </button>
+          </Link>
         </div>
       </div>
     </li>

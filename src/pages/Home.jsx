@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const Home = () => {
   return (
     <>
@@ -11,23 +13,15 @@ const Home = () => {
             <p className="py-6">
               Put your thoughts on the page and let your mind breathe
             </p>
-            <button className="btn btn-primary bg-(--primary-color)">
-              See More
-            </button>
+            <Link
+              to="journals"
+              className="btn btn-primary bg-(--primary-color)"
+            >
+              My Journals
+            </Link>
           </div>
         </div>
       </div>
-      {/* <div className="hero min-h-screen bg-[url('bg.jpg')]">
-        <div className="hero-overlay"></div>
-        <div className="hero-content text-neutral-content text-center">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-8xl font-bold"></h1>
-            <p className="mb-5 text-2xl">
-              
-            </p>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };

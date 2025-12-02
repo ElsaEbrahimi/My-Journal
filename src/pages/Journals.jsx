@@ -1,6 +1,6 @@
 // Journals.jsx
 
-import { useOutletContext } from "react-router";
+import { useOutletContext } from "react-router-dom";
 import JournalCard from "../components/JournalCard";
 
 import { useJournals } from "../contexts/JournalContext";
@@ -30,10 +30,11 @@ const Journals = () => {
 
       {/* Journal Cards List */}
       <ul className="list bg-base-100 rounded-xl shadow-lg p-4 space-y-4 w-full max-w-3xl">
-        {combinedJournals.map(({ title, date, image, content }) => (
+        {combinedJournals.map(({ id, title, date, image, content }) => (
           // Passing every value to the JournalCard component
           <JournalCard
-            key={date} // unique key for React
+            key={id} // unique key for React
+            id={id}
             title={title} // journal title
             date={date} // journal date (important!)
             content={content} // journal short content
