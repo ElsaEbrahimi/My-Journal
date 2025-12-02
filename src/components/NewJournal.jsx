@@ -6,7 +6,7 @@ const [journals, setJournals] = useState(() => {
 });
 
 const addjournal = (title, date, content) => {
-  const newJournal = { title, date, bio };
+  const newJournal = { title, date, content };
   const updated = [...journals, newJournal];
   setJournals(updated);
   localStorage.setItem("journals", JSON.stringify(updated));

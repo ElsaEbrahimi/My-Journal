@@ -5,14 +5,10 @@ import SubmitBtn from "./SubmitBtn.jsx";
 
 const AddJournal = () => {
   // State for showing the selected date on the button
-  const [selectedDate, setSelectedDate] = useState("Pick a date");
+  const [selectedDate, setSelectedDate] = useState("");
 
   // Ref to access the Cally web component directly
   const calRef = useRef(null);
-
-  // Controlled inputs for title + content (used only for UI, not form submit)
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
 
   // useActionState handles form submission, validation errors, and loading state
   const [state, formAction, isPending] = useActionState(action, {});
@@ -21,15 +17,16 @@ const AddJournal = () => {
   async function action(_prevState, formData) {
     // Read values from FormData (always strings)
     const title = formData.get("title");
+    const date = formData.get("date");
     const content = formData.get("content");
     const pic = formData.get("pic");
 
     // Validate values (custom function)
-    const validationErrors = validate({ title, content, pic });
+    const validationErrors = validate({ title, content, pic, date });
 
     // If no errors → simulate waiting and finish
     if (Object.keys(validationErrors).length === 0) {
-      await sleep(2000);
+      await sleep(1000);
       alert("Form submitted successfully!");
       return {};
     }
@@ -37,7 +34,7 @@ const AddJournal = () => {
     // Return errors and keep form values in state
     return {
       errors: validationErrors,
-      input: { title, content },
+      input: { title, content, date },
     };
   }
 
@@ -68,7 +65,6 @@ const AddJournal = () => {
             name="title"
             id="title"
             disabled={isPending} // disable while submitting
-            onChange={(e) => setTitle(e.target.value)}
             type="text"
             className="input input-bordered"
             placeholder="Type here"
@@ -78,7 +74,7 @@ const AddJournal = () => {
             <p className="text-sm text-red-600 mt-1">{state.errors.title}</p>
           )}
         </div>
-
+        <label htmlFor="date">Pick a Date</label>
         {/* Date Picker Button */}
         <button className="input input-bordered" onClick={handleButtonClick}>
           {selectedDate}
@@ -88,7 +84,13 @@ const AddJournal = () => {
         <calendar-date ref={calRef} class="cally" onClick={handleDateClick}>
           <calendar-month></calendar-month>
         </calendar-date>
+        {/* send selected date with the form */}
+        <input type="hidden" name="date" value={selectedDate} />
 
+        {/* show date error from action state */}
+        {state.errors?.date && (
+          <p className="text-sm text-red-600 mt-1">{state.errors.date}</p>
+        )}
         {/* File Upload Field */}
         <div>
           <label htmlFor="pic">Pick a Picture</label>
@@ -114,7 +116,6 @@ const AddJournal = () => {
           <textarea
             className="textarea h-24"
             placeholder="Write down whatever is on your mind"
-            onChange={(e) => setContent(e.target.value)}
             defaultValue={state.input?.content}
             name="content"
             id="content"
