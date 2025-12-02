@@ -15,7 +15,7 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <Outlet context={entries} />
+      <Outlet context={{ entries, setEntries }} />
     </>
   );
 };

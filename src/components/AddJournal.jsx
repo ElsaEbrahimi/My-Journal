@@ -2,8 +2,15 @@ import "cally";
 import { useState, useRef, useActionState } from "react";
 import { sleep, validate } from "../utils/index.js";
 import SubmitBtn from "./SubmitBtn.jsx";
-
+import { useJournals } from "../contexts/JournalContext";
+import { useOutletContext } from "react-router";
 const AddJournal = () => {
+  // From use context
+  const { addJournal } = useJournals();
+
+  // From Outlet context
+  const { entries, setEntries } = useOutletContext();
+
   // State for showing the selected date on the button
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -15,26 +22,53 @@ const AddJournal = () => {
 
   // Action runs on form submit (React server-like client action)
   async function action(_prevState, formData) {
-    // Read values from FormData (always strings)
+    // Get form values
     const title = formData.get("title");
     const date = formData.get("date");
     const content = formData.get("content");
-    const pic = formData.get("pic");
+    const pic = formData.get("pic"); // File object
 
-    // Validate values (custom function)
+    // Validate fields
     const validationErrors = validate({ title, content, pic, date });
 
-    // If no errors → simulate waiting and finish
-    if (Object.keys(validationErrors).length === 0) {
-      await sleep(1000);
-      alert("Form submitted successfully!");
-      return {};
+    // If there are validation errors → return them
+    if (Object.keys(validationErrors).length > 0) {
+      return { errors: validationErrors, input: { title, date, content } };
     }
 
-    // Return errors and keep form values in state
+    // Simulate loading
+    await sleep(1000);
+
+    // Create a new journal entry
+    const newEntry = {
+      id: crypto.randomUUID(),
+      title,
+      date,
+      content,
+      pic,
+    };
+
+    // Update React state and sync with localStorage
+    setEntries((prev) => {
+      // Add new entry on top
+      const updated = [newEntry, ...prev];
+
+      // Save updated list to localStorage
+      localStorage.setItem("journals", JSON.stringify(updated));
+
+      return updated; // This updates the UI
+    });
+
+    // Save in context (e.g., global state)
+    addJournal(newEntry);
+
+    // Feedback to the user
+    alert("Journal added!");
+
+    // Clear form fields
     return {
-      errors: validationErrors,
-      input: { title, content, date },
+      errors: {},
+      input: { title: "", date: "", content: "" },
     };
   }
 

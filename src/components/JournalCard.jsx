@@ -8,7 +8,14 @@ const JournalCard = ({ title, date, image, content }) => {
       {/* Image container with fixed size */}
       <div className="w-32 h-32 rounded-lg overflow-hidden shrink-0">
         {/* Image set to cover the box */}
-        <img className="w-full h-full object-cover" src={image} alt={title} />
+        <img
+          className="w-full h-full object-cover"
+          src={image || "/no-pic.jpg"} // Use default if image prop is falsy
+          // If the image fails to load, use default image from public folder
+          onError={(e) => {
+            e.currentTarget.src = "/no-pic.jpg"; // replace with your default image path
+          }}
+        />
       </div>
 
       {/* Right side: title, date, content, buttons */}

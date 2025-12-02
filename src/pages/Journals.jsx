@@ -1,12 +1,21 @@
 // Journals.jsx
 
-import JournalCard from "../components/JournalCard";
 import { useOutletContext } from "react-router";
+import JournalCard from "../components/JournalCard";
+
+import { useJournals } from "../contexts/JournalContext";
 
 const Journals = () => {
   // Getting default journals from parent layout via Outlet context
-  const defaultJournal = useOutletContext();
+  const { entries: defaultJournal } = useOutletContext();
+  // Inside Journals component
+  const { journals } = useJournals();
 
+  // Combine new journals with default ones
+  const combinedJournals = [
+    ...defaultJournal,
+    ...journals.filter((j) => !defaultJournal.some((d) => d.date === j.date)),
+  ];
   return (
     <div className="py-15 flex flex-col justify-center items-center">
       {/* Banner Image Section */}
@@ -21,7 +30,7 @@ const Journals = () => {
 
       {/* Journal Cards List */}
       <ul className="list bg-base-100 rounded-xl shadow-lg p-4 space-y-4 w-full max-w-3xl">
-        {defaultJournal.map(({ title, date, image, content }) => (
+        {combinedJournals.map(({ title, date, image, content }) => (
           // Passing every value to the JournalCard component
           <JournalCard
             key={date} // unique key for React
