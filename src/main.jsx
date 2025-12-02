@@ -4,11 +4,13 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
 import "cally";
-
+import { JournalProvider } from "./contexts/JournalContext";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <JournalProvider>
+        <App />
+      </JournalProvider>
     </BrowserRouter>
   </StrictMode>
 );
