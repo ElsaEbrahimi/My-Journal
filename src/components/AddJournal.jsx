@@ -4,9 +4,10 @@ import { sleep, validate } from "../utils/index.js";
 import SubmitBtn from "./SubmitBtn.jsx";
 import { useJournals } from "../contexts/JournalContext";
 import { useOutletContext } from "react-router";
+
 const AddJournal = () => {
   // From use context
-  const { addJournal } = useJournals();
+  const { addJournal, journals } = useJournals(); // get journals here once
 
   // From Outlet context
   const { entries, setEntries } = useOutletContext();
@@ -28,8 +29,17 @@ const AddJournal = () => {
     const content = formData.get("content");
     const pic = formData.get("pic"); // File object
 
-    // Validate fields
-    const validationErrors = validate({ title, content, pic, date });
+    // Prepare array of existing dates (default + user-added)
+    const existingDates = [
+      ...entries.map((e) => e.date), // default entries
+      ...journals.map((j) => j.date), // user-added entries
+    ];
+
+    // Validate fields including unique date
+    const validationErrors = validate(
+      { title, content, pic, date },
+      existingDates
+    );
 
     // If there are validation errors → return them
     if (Object.keys(validationErrors).length > 0) {
@@ -50,16 +60,12 @@ const AddJournal = () => {
 
     // Update React state and sync with localStorage
     setEntries((prev) => {
-      // Add new entry on top
-      const updated = [newEntry, ...prev];
-
-      // Save updated list to localStorage
-      localStorage.setItem("journals", JSON.stringify(updated));
-
-      return updated; // This updates the UI
+      const updated = [newEntry, ...prev]; // add new entry on top
+      localStorage.setItem("journals", JSON.stringify(updated)); // persist
+      return updated; // update UI
     });
 
-    // Save in context (e.g., global state)
+    // Save in context (global state)
     addJournal(newEntry);
 
     // Feedback to the user
@@ -108,6 +114,7 @@ const AddJournal = () => {
             <p className="text-sm text-red-600 mt-1">{state.errors.title}</p>
           )}
         </div>
+
         <label htmlFor="date">Pick a Date</label>
         {/* Date Picker Button */}
         <button className="input input-bordered" onClick={handleButtonClick}>
@@ -125,6 +132,7 @@ const AddJournal = () => {
         {state.errors?.date && (
           <p className="text-sm text-red-600 mt-1">{state.errors.date}</p>
         )}
+
         {/* File Upload Field */}
         <div>
           <label htmlFor="pic">Pick a Picture</label>
