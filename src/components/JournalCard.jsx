@@ -32,7 +32,7 @@ const JournalCard = ({ id, title, date, image, content }) => {
         <p className="text-sm mt-2 line-clamp-2">{content}</p>
 
         {/* Buttons section */}
-        <div className="mt-auto flex gap-2 pt-3">
+        <div className="mt-auto flex gap-1 pt-2">
           {/* Favorite (heart) button */}
           {/* hover:bg-pink-200 gives light pink hover effect */}
           <button
@@ -43,6 +43,10 @@ const JournalCard = ({ id, title, date, image, content }) => {
           </button>
 
           {/* View details button */}
+
+          <button className="btn btn-sm btn-ghost material-icons">
+            delete
+          </button>
           <Link
             to={`/journals/${id}`}
             className="btn btn-sm btn-outline"
