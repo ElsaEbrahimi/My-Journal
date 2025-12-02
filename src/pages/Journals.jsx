@@ -27,6 +27,27 @@ const Journals = () => {
       <h1 className="text-5xl font-bold text-(--primary-color)">
         Journal List
       </h1>
+      <form className="filter my-4">
+        <input className="btn btn-square" type="reset" value="×" />
+        <input
+          className="btn"
+          type="radio"
+          name="frameworks"
+          aria-label="All"
+        />
+        <input
+          className="btn"
+          type="radio"
+          name="frameworks"
+          aria-label="Favorite"
+        />
+        <input
+          className="btn"
+          type="radio"
+          name="frameworks"
+          aria-label="Deleted"
+        />
+      </form>
 
       {/* Journal Cards List */}
       <ul className="list bg-base-100 rounded-xl shadow-lg p-4 space-y-4 w-full max-w-3xl">
